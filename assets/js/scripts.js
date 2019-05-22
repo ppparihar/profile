@@ -823,8 +823,41 @@ function initparallax() {
             audprev[0].currentTime = 0;
         }
     });
+
+function setExperience(){
+
+var exp = getExperince(new Date(2018, 08,01),new Date());
+    $("#exp-eze").append("Aug 2018 - Present ("+exp+")");
+}
+function getExperince(dateFrom,dateTo){
+   var mon= monthDiff(dateFrom,dateTo);
+   var years = Math.floor(mon/12);
+   var months = mon%12;
+   var result = [];
+   
+   if(years>0){
+    result.push(years);
+    if(years>1){
+        result.push("YRS");
+    }
+    else{
+        result.push("YR");
+    }
+   }
+result.push(months);
+result.push("MOS");
+return result.join(" ");
+} 
+
+function monthDiff(dateFrom, dateTo) {
+     var diff= dateTo.getMonth() - dateFrom.getMonth() + 
+      (12 * (dateTo.getFullYear() - dateFrom.getFullYear()));
+    var d= dateTo.getDate() - dateFrom.getDate()>0?1:0;
+    return diff+d;
+}  
 //   Init All ------------------
 $(function () {
     initparallax();
     initProfile();
+    setExperience();
 });
